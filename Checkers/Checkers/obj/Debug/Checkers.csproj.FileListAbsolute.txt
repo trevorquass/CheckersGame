@@ -11,3 +11,15 @@ C:\Users\tquass_be\CheckersProject\Checkers\Checkers\obj\Debug\Checkers.Properti
 C:\Users\tquass_be\CheckersProject\Checkers\Checkers\obj\Debug\Checkers.csproj.GenerateResource.Cache
 C:\Users\tquass_be\CheckersProject\Checkers\Checkers\obj\Debug\Checkers.exe
 C:\Users\tquass_be\CheckersProject\Checkers\Checkers\obj\Debug\Checkers.pdb
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\bin\Debug\Checkers.exe.config
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers.exe
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers.pdb
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\bin\Debug\Checkers.exe
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\bin\Debug\Checkers.pdb
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\MainWindow.baml
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\MainWindow.g.cs
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\App.g.cs
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers_MarkupCompile.cache
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers.g.resources
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers.Properties.Resources.resources
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers.csproj.GenerateResource.Cache
