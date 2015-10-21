@@ -25,9 +25,11 @@ namespace Checkers
         }
         public void Connect_Click(object sender, RoutedEventArgs e)
         {
-            RunCheckersGameClient();
+            SendAndReceiveUserInfo();
         }
-        public void RunCheckersGameClient()
+
+        //BFT TODO: Put this in another class
+        public void SendAndReceiveUserInfo()
         {
             const int portNumber = 7777;
             const string serverIP = "10.2.20.16";

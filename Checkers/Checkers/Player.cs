@@ -22,7 +22,6 @@ namespace Checkers
             playerName = inputName;
             playerPoints = 0;
         }
-        //BFT TODO: Properties with default get/set are redundant
         public string Name
         {
             get
@@ -30,6 +29,5 @@ namespace Checkers
                 return playerName;
             }
         }
-        //BFT TODO: Properties with default get/set are redundant
     }
 }

@@ -9,11 +9,8 @@ namespace Checkers
 {
     public class GameSquare
     {
-        //BFT TODO: Add System.?.Point member variable here to track position (instead of having position on the GameBoard class)
-        //BFT TODO: Don't prefix member names with class name
         public enum e_GameSquareOccupation
         {
-            invalidSpace = -1,
             notOccupied = 0,
             topPlayerRedPiece = 1,
             bottomPlayerBlackPiece = 2,
@@ -26,6 +23,28 @@ namespace Checkers
         {
             position = new Point();
             gameSquareOccupation = e_GameSquareOccupation.notOccupied;
+        }
+        public void SetGameSquareImageSource()
+        {
+            string gameSquareImageSource = string.Empty;
+            switch (gameSquareOccupation)
+            {
+                case e_GameSquareOccupation.notOccupied:
+                    gameSquareImageSource = string.Empty;
+                    break;
+                case e_GameSquareOccupation.topPlayerRedPiece:
+                    gameSquareImageSource = "/Checkers;component/Images/Red.png";
+                    break;
+                case e_GameSquareOccupation.bottomPlayerBlackPiece:
+                    gameSquareImageSource = "/Checkers;component/Images/Black.png";
+                    break;
+                case e_GameSquareOccupation.topPlayerKingRedPiece:
+                    gameSquareImageSource = "/Checkers;component/Images/KingRed.png";
+                    break;
+                case e_GameSquareOccupation.bottomPlayerKingBlackPiece:
+                    gameSquareImageSource = "/Checkers;component/Images/KingBlack.png";
+                    break;
+            }
         }
     }
 }

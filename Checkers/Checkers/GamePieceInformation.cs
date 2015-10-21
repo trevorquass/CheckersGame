@@ -11,6 +11,5 @@ namespace Checkers
     {
         public Point gameSquarePosition;
         public GameSquare.e_GameSquareOccupation gamePieceType;
-        //BFT TODO: Properties with default get/set are redundant
     }
 }
