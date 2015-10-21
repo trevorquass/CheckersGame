@@ -23,3 +23,8 @@ C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers_MarkupCompi
 C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers.g.resources
 C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers.Properties.Resources.resources
 C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers.csproj.GenerateResource.Cache
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\bin\Debug\Images\Black.png
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\bin\Debug\Images\KingBlack.png
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\bin\Debug\Images\KingRed.png
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\bin\Debug\Images\Red.png
+C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers_Content.g.cs

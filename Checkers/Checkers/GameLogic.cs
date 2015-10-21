@@ -9,9 +9,6 @@ namespace Checkers
 {
     public class GameLogic
     {
-        public void AllowMove()
-        {
 
-        }
     }
 }
