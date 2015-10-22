@@ -36,5 +36,22 @@ namespace Checkers
                 MessageBox.Show("Exception" + ex.Message);
             }
         }
+        public void SendWinnerInfo(string winner)
+        {
+            const int portNumber = 7777;
+            const string serverIP = "10.2.20.16";
+            try
+            {
+                TcpClient checkersGameClient = new TcpClient(serverIP, portNumber);
+                NetworkStream outgoingStream = checkersGameClient.GetStream();
+                byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(winner);
+                outgoingStream.Write(bytesToSend, 0, bytesToSend.Length);
+                checkersGameClient.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Exception" + ex.Message);
+            }
+        }
     }
 }

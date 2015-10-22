@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using System.Net;
+using System.Net.Sockets;
+
 namespace Checkers
 {
     public partial class MainWindow : Window
@@ -30,7 +33,7 @@ namespace Checkers
             this.Title = "Checkers: Blacks turn";
             MakeBoard();
         }
-        private void MakeBoard()
+        public void MakeBoard()
         {
             for (int r = 1; r < 9; r++)
             {
@@ -58,7 +61,7 @@ namespace Checkers
             }
             MakeButtons();
         }
-        private void ClearBoard()
+        public void ClearBoard()
         {
             for (int r = 1; r < 9; r++)
             {
@@ -69,7 +72,7 @@ namespace Checkers
                 }
             }
         }
-        private void MakeButtons()
+        public void MakeButtons()
         {
             for (int r = 1; r < 9; r++)
             {
@@ -196,7 +199,7 @@ namespace Checkers
                 }
             }
         }
-        private bool CheckMove()
+        public bool CheckMove()
         {
             StackPanel stackPanel1 = (StackPanel)GetGridElement(CheckersGrid, currentMove.piece1.Row, currentMove.piece1.Column);
             StackPanel stackPanel2 = (StackPanel)GetGridElement(CheckersGrid, currentMove.piece2.Row, currentMove.piece2.Column);
@@ -241,7 +244,7 @@ namespace Checkers
                 return false;
             }
         }
-        private bool CheckMoveRed(Button button1, Button button2)
+        public bool CheckMoveRed(Button button1, Button button2)
         {
             GameBoard currentBoard = GetCurrentBoard();
             List<GamePieceMovement> jumpMoves = currentBoard.CheckJumps("Red");
@@ -304,7 +307,7 @@ namespace Checkers
             DisplayError("Invalid Move. Try Again.");
             return false;
         }
-        private bool CheckMoveBlack(Button button1, Button button2)
+        public bool CheckMoveBlack(Button button1, Button button2)
         {
             GameBoard currentBoard = GetCurrentBoard();
             List<GamePieceMovement> jumpMoves = currentBoard.CheckJumps("Black");
@@ -367,7 +370,7 @@ namespace Checkers
             DisplayError("Invalid Move. Try Again.");
             return false;
         }
-        private void MakeMove()
+        public void MakeMove()
         {
             if ((currentMove.piece1 != null) && (currentMove.piece2 != null))
             {
@@ -398,7 +401,7 @@ namespace Checkers
                 CheckWin();
             }
         }
-        private GameBoard GetCurrentBoard()
+        public GameBoard GetCurrentBoard()
         {
             GameBoard board = new GameBoard();
             for (int r = 1; r < 9; r++)
@@ -434,7 +437,7 @@ namespace Checkers
             }
             return board;
         }
-        private void CheckKing(GamePiece tmpPiece)
+        public void CheckKing(GamePiece tmpPiece)
         {
             StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, tmpPiece.Row, tmpPiece.Column);
             if (stackPanel.Children.Count > 0)
@@ -462,7 +465,7 @@ namespace Checkers
                 }
             }
         }
-        private void AddBlackButton(GamePiece middleMove)
+        public void AddBlackButton(GamePiece middleMove)
         {
             StackPanel stackPanel = new StackPanel();
             stackPanel.Background = Brushes.DimGray;
@@ -479,7 +482,7 @@ namespace Checkers
             Grid.SetRow(stackPanel, middleMove.Row);
             CheckersGrid.Children.Add(stackPanel);
         }
-        private void CheckWin()
+        public void CheckWin()
         {
             int totalBlack = 0, totalRed = 0;
             for (int r = 1; r < 9; r++)
@@ -498,9 +501,17 @@ namespace Checkers
                 }
             }
             if (totalBlack == 0)
+            {
                 winner = "Red";
+                CheckersGameClient client = new CheckersGameClient();
+                client.SendWinnerInfo(winner);
+            }
             if (totalRed == 0)
+            {
                 winner = "Black";
+                CheckersGameClient client = new CheckersGameClient();
+                client.SendWinnerInfo(winner);
+            }
             if (winner != null)
             {
                 for (int r = 1; r < 9; r++)
@@ -520,7 +531,7 @@ namespace Checkers
                     NewGame();
             }
         }
-        private void NewGame()
+        public void NewGame()
         {
             currentMove = null;
             winner = null;
@@ -529,16 +540,16 @@ namespace Checkers
             ClearBoard();
             MakeBoard();
         }
-        private void DisplayError(string error)
+        public void DisplayError(string error)
         {
             MessageBox.Show(error, "Invalid Move", MessageBoxButton.OK);
         }
-        private void Connect_Click(object sender, RoutedEventArgs e)
+        public void Connect_Click(object sender, RoutedEventArgs e)
         {
             CheckersGameClient client = new CheckersGameClient();
             client.SendAndReceiveUserInfo();
         }
-        private void StartGame_Click(object sender, RoutedEventArgs e)
+        public void StartGame_Click(object sender, RoutedEventArgs e)
         {
             NewGame();
         }

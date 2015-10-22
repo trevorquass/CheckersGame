@@ -28,4 +28,3 @@ C:\Users\tquass_be\CheckersGame\Checkers\Checkers\bin\Debug\Images\KingBlack.png
 C:\Users\tquass_be\CheckersGame\Checkers\Checkers\bin\Debug\Images\KingRed.png
 C:\Users\tquass_be\CheckersGame\Checkers\Checkers\bin\Debug\Images\Red.png
 C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers_Content.g.cs
-C:\Users\tquass_be\CheckersGame\Checkers\Checkers\obj\Debug\Checkers.csprojResolveAssemblyReference.cache
