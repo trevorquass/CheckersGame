@@ -21,6 +21,7 @@ namespace Checkers
             this.piece1 = piece1;
             this.piece2 = piece2;
         }
+        //BFT TODO: Make distinction between red/black king
         public bool IsAdjacent(string color)
         {
             if (color == "Black")

@@ -63,22 +63,24 @@ namespace Checkers
         }
         public void ClearBoard()
         {
-            for (int r = 1; r < 9; r++)
+            for (int row = 1; row < 9; row++)
             {
-                for (int c = 0; c < 8; c++)
+                for (int colulmn = 0; colulmn < 8; colulmn++)
                 {
-                    StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, r, c);
+                    StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, row, colulmn);
                     CheckersGrid.Children.Remove(stackPanel);
                 }
             }
         }
+
+        //BFT TODO: Rename r and c to row and column
         public void MakeButtons()
         {
-            for (int r = 1; r < 9; r++)
+            for (int row = 1; row < 9; row++)
             {
-                for (int c = 0; c < 8; c++)
+                for (int column = 0; column < 8; column++)
                 {
-                    StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, r, c);
+                    StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, row, column);
                     Button button = new Button();
                     button.Click += new RoutedEventHandler(button_Click);
                     button.Height = 30;
@@ -89,70 +91,70 @@ namespace Checkers
                     redBrush.ImageSource = new BitmapImage(new Uri("Images/Red.png", UriKind.Relative));
                     var blackBrush = new ImageBrush();
                     blackBrush.ImageSource = new BitmapImage(new Uri("Images/Black.png", UriKind.Relative));
-                    switch (r)
+                    switch (row)
                     {
                         case 1:
-                            if (c % 2 != 0)
+                            if (column % 2 != 0)
                             {
-
+                                //BFT TODO: Make each of these blocks into its own function, such that each case is just a function call (e.g. AddRedPiece())
                                 button.Background = redBrush;
-                                button.Name = "buttonRed" + r + c;
+                                button.Name = "buttonRed" + row + column;
                                 stackPanel.Children.Add(button);
                             }
                             break;
                         case 2:
-                            if (c % 2 == 0)
+                            if (column % 2 == 0)
                             {
                                 button.Background = redBrush;
-                                button.Name = "buttonRed" + r + c;
+                                button.Name = "buttonRed" + row + column;
                                 stackPanel.Children.Add(button);
                             }
                             break;
                         case 3:
-                            if (c % 2 != 0)
+                            if (column % 2 != 0)
                             {
                                 button.Background = redBrush;
-                                button.Name = "buttonRed" + r + c;
+                                button.Name = "buttonRed" + row + column;
                                 stackPanel.Children.Add(button);
                             }
                             break;
                         case 4:
-                            if (c % 2 == 0)
+                            if (column % 2 == 0)
                             {
                                 button.Background = Brushes.DimGray;
-                                button.Name = "button" + r + c;
+                                button.Name = "button" + row + column;
                                 stackPanel.Children.Add(button);
                             }
                             break;
                         case 5:
-                            if (c % 2 != 0)
+                            if (column % 2 != 0)
                             {
                                 button.Background = Brushes.DimGray;
-                                button.Name = "button" + r + c;
+                                button.Name = "button" + row + column;
                                 stackPanel.Children.Add(button);
                             }
                             break;
                         case 6:
-                            if (c % 2 == 0)
+                            if (column % 2 == 0)
                             {
                                 button.Background = blackBrush;
-                                button.Name = "buttonBlack" + r + c;
+                                button.Name = "buttonBlack" + row + column;
                                 stackPanel.Children.Add(button);
                             }
                             break;
                         case 7:
-                            if (c % 2 != 0)
+                            if (column % 2 != 0)
                             {
                                 button.Background = blackBrush;
-                                button.Name = "buttonBlack" + r + c;
+                                button.Name = "buttonBlack" + row + column;
                                 stackPanel.Children.Add(button);
                             }
                             break;
                         case 8:
-                            if (c % 2 == 0)
+                            if (column % 2 == 0)
                             {
                                 button.Background = blackBrush;
-                                button.Name = "buttonBlack" + r + c;
+                                button.Name = "buttonBlack" + row + column;
                                 stackPanel.Children.Add(button);
                             }
                             break;
@@ -162,12 +164,12 @@ namespace Checkers
                 }
             }
         }
-        UIElement GetGridElement(Grid g, int r, int c)
+        UIElement GetGridElement(Grid grid, int row, int column)
         {
-            for (int i = 0; i < g.Children.Count; i++)
+            for (int i = 0; i < grid.Children.Count; i++)
             {
-                UIElement e = g.Children[i];
-                if (Grid.GetRow(e) == r && Grid.GetColumn(e) == c)
+                UIElement e = grid.Children[i];
+                if (Grid.GetRow(e) == row && Grid.GetColumn(e) == column)
                     return e;
             }
             return null;
@@ -178,7 +180,7 @@ namespace Checkers
             StackPanel stackPanel = (StackPanel)button.Parent;
             int row = Grid.GetRow(stackPanel);
             int col = Grid.GetColumn(stackPanel);
-            Console.WriteLine("Row: " + row + " Column: " + col);
+            //Console.WriteLine("Row: " + row + " Column: " + col);
             if (currentMove == null)
                 currentMove = new GamePieceMovement();
             if (currentMove.piece1 == null)
@@ -230,24 +232,24 @@ namespace Checkers
             }
             if (button1.Name.Contains("Black"))
             {
-                return CheckMoveBlack(button1, button2);
+                return AllowMove(button1, button2, "Black", "Red");
             }
             else if (button1.Name.Contains("Red"))
             {
-                return CheckMoveRed(button1, button2);
+                return AllowMove(button1, button2, "Red", "Black");
             }
             else
             {
                 currentMove.piece1 = null;
                 currentMove.piece2 = null;
-                Console.WriteLine("False");
+                //Console.WriteLine("False");
                 return false;
             }
         }
-        public bool CheckMoveRed(Button button1, Button button2)
+        public bool AllowMove(Button button1, Button button2, string colorCheckingMoveFor, string oppositeColor)
         {
             GameBoard currentBoard = GetCurrentBoard();
-            List<GamePieceMovement> jumpMoves = currentBoard.CheckJumps("Red");
+            List<GamePieceMovement> jumpMoves = currentBoard.CheckJumps(colorCheckingMoveFor);
 
             if (jumpMoves.Count > 0)
             {
@@ -262,11 +264,11 @@ namespace Checkers
                     DisplayError("Jump must be taken");
                     currentMove.piece1 = null;
                     currentMove.piece2 = null;
-                    Console.WriteLine("False");
+                    //Console.WriteLine("False");
                     return false;
                 }
             }
-            if (button1.Name.Contains("Red"))
+            if (button1.Name.Contains(colorCheckingMoveFor))
             {
                 if (button1.Name.Contains("King"))
                 {
@@ -277,90 +279,27 @@ namespace Checkers
                     {
                         StackPanel middleStackPanel = (StackPanel)GetGridElement(CheckersGrid, middlePiece.Row, middlePiece.Column);
                         Button middleButton = (Button)middleStackPanel.Children[0];
-                        if (middleButton.Name.Contains("Black"))
+                        if (middleButton.Name.Contains(oppositeColor))
                         {
                             CheckersGrid.Children.Remove(middleStackPanel);
-                            AddBlackButton(middlePiece);
+                            RemoveJumpedPiece(middlePiece);
                             return true;
                         }
                     }
                 }
                 else
                 {
-                    if ((currentMove.IsAdjacent("Red")) && (!button2.Name.Contains("Black")) && (!button2.Name.Contains("Red")))
+                    if ((currentMove.IsAdjacent(colorCheckingMoveFor)) && (!button2.Name.Contains("Black")) && (!button2.Name.Contains("Red")))
                         return true;
-                    GamePiece middlePiece = currentMove.CheckJump("Red");
+                    GamePiece middlePiece = currentMove.CheckJump(colorCheckingMoveFor);
                     if ((middlePiece != null) && (!button2.Name.Contains("Black")) && (!button2.Name.Contains("Red")))
                     {
                         StackPanel middleStackPanel = (StackPanel)GetGridElement(CheckersGrid, middlePiece.Row, middlePiece.Column);
                         Button middleButton = (Button)middleStackPanel.Children[0];
-                        if (middleButton.Name.Contains("Black"))
+                        if (middleButton.Name.Contains(oppositeColor))
                         {
                             CheckersGrid.Children.Remove(middleStackPanel);
-                            AddBlackButton(middlePiece);
-                            return true;
-                        }
-                    }
-                }
-            }
-            currentMove = null;
-            DisplayError("Invalid Move. Try Again.");
-            return false;
-        }
-        public bool CheckMoveBlack(Button button1, Button button2)
-        {
-            GameBoard currentBoard = GetCurrentBoard();
-            List<GamePieceMovement> jumpMoves = currentBoard.CheckJumps("Black");
-
-            if (jumpMoves.Count > 0)
-            {
-                bool invalid = true;
-                foreach (GamePieceMovement move in jumpMoves)
-                {
-                    if (currentMove.Equals(move))
-                        invalid = false;
-                }
-                if (invalid)
-                {
-                    DisplayError("Jump must be taken");
-                    currentMove.piece1 = null;
-                    currentMove.piece2 = null;
-                    Console.WriteLine("False");
-                    return false;
-                }
-            }
-            if (button1.Name.Contains("Black"))
-            {
-                if (button1.Name.Contains("King"))
-                {
-                    if ((currentMove.IsAdjacent("King")) && (!button2.Name.Contains("Black")) && (!button2.Name.Contains("Red")))
-                        return true;
-                    GamePiece middlePiece = currentMove.CheckJump("King");
-                    if ((middlePiece != null) && (!button2.Name.Contains("Black")) && (!button2.Name.Contains("Red")))
-                    {
-                        StackPanel middleStackPanel = (StackPanel)GetGridElement(CheckersGrid, middlePiece.Row, middlePiece.Column);
-                        Button middleButton = (Button)middleStackPanel.Children[0];
-                        if (middleButton.Name.Contains("Red"))
-                        {
-                            CheckersGrid.Children.Remove(middleStackPanel);
-                            AddBlackButton(middlePiece);
-                            return true;
-                        }
-                    }
-                }
-                else
-                {
-                    if ((currentMove.IsAdjacent("Black")) && (!button2.Name.Contains("Black")) && (!button2.Name.Contains("Red")))
-                        return true;
-                    GamePiece middlePiece = currentMove.CheckJump("Black");
-                    if ((middlePiece != null) && (!button2.Name.Contains("Black")) && (!button2.Name.Contains("Red")))
-                    {
-                        StackPanel middleStackPanel = (StackPanel)GetGridElement(CheckersGrid, middlePiece.Row, middlePiece.Column);
-                        Button middleButton = (Button)middleStackPanel.Children[0];
-                        if (middleButton.Name.Contains("Red"))
-                        {
-                            CheckersGrid.Children.Remove(middleStackPanel);
-                            AddBlackButton(middlePiece);
+                            RemoveJumpedPiece(middlePiece);
                             return true;
                         }
                     }
@@ -374,8 +313,8 @@ namespace Checkers
         {
             if ((currentMove.piece1 != null) && (currentMove.piece2 != null))
             {
-                Console.WriteLine("Piece1 " + currentMove.piece1.Row + ", " + currentMove.piece1.Column);
-                Console.WriteLine("Piece2 " + currentMove.piece2.Row + ", " + currentMove.piece2.Column);
+                //Console.WriteLine("Piece1 " + currentMove.piece1.Row + ", " + currentMove.piece1.Column);
+                //Console.WriteLine("Piece2 " + currentMove.piece2.Row + ", " + currentMove.piece2.Column);
                 StackPanel stackPanel1 = (StackPanel)GetGridElement(CheckersGrid, currentMove.piece1.Row, currentMove.piece1.Column);
                 StackPanel stackPanel2 = (StackPanel)GetGridElement(CheckersGrid, currentMove.piece2.Row, currentMove.piece2.Column);
                 CheckersGrid.Children.Remove(stackPanel1);
@@ -386,7 +325,7 @@ namespace Checkers
                 Grid.SetRow(stackPanel2, currentMove.piece1.Row);
                 Grid.SetColumn(stackPanel2, currentMove.piece1.Column);
                 CheckersGrid.Children.Add(stackPanel2);
-                CheckKing(currentMove.piece2);
+                MakePieceKing(currentMove.piece2);
                 currentMove = null;
                 if (turn == "Black")
                 {
@@ -404,42 +343,43 @@ namespace Checkers
         public GameBoard GetCurrentBoard()
         {
             GameBoard board = new GameBoard();
-            for (int r = 1; r < 9; r++)
+            for (int row = 1; row < 9; row++)
             {
-                for (int c = 0; c < 8; c++)
+                for (int column = 0; column < 8; column++)
                 {
-                    StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, r, c);
+                    StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, row, column);
                     if (stackPanel.Children.Count > 0)
                     {
                         Button button = (Button)stackPanel.Children[0];
                         if (button.Name.Contains("Red"))
                         {
                             if (button.Name.Contains("King"))
-                                board.SetGameBoardState(r - 1, c, 3);
+                                board.SetGameBoardState(row - 1, column, 3);
                             else
-                                board.SetGameBoardState(r - 1, c, 1);
+                                board.SetGameBoardState(row - 1, column, 1);
                         }
                         else if (button.Name.Contains("Black"))
                         {
                             if (button.Name.Contains("King"))
-                                board.SetGameBoardState(r - 1, c, 4);
+                                board.SetGameBoardState(row - 1, column, 4);
                             else
-                                board.SetGameBoardState(r - 1, c, 2);
+                                board.SetGameBoardState(row - 1, column, 2);
                         }
                         else
-                            board.SetGameBoardState(r - 1, c, 0);
+                            board.SetGameBoardState(row - 1, column, 0);
                     }
                     else
                     {
-                        board.SetGameBoardState(r - 1, c, -1);
+                        board.SetGameBoardState(row - 1, column, -1);
                     }
                 }
             }
             return board;
         }
-        public void CheckKing(GamePiece tmpPiece)
+        //BFT TODO: Rename to match functionality
+        public void MakePieceKing(GamePiece tempPiece)
         {
-            StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, tmpPiece.Row, tmpPiece.Column);
+            StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, tempPiece.Row, tempPiece.Column);
             if (stackPanel.Children.Count > 0)
             {
                 Button button = (Button)stackPanel.Children[0];
@@ -449,23 +389,25 @@ namespace Checkers
                 blackBrush.ImageSource = new BitmapImage(new Uri("Images/KingBlack.png", UriKind.Relative));
                 if ((button.Name.Contains("Black")) && (!button.Name.Contains("King")))
                 {
-                    if (tmpPiece.Row == 1)
+                    if (tempPiece.Row == 1)
                     {
-                        button.Name = "button" + "Black" + "King" + tmpPiece.Row + tmpPiece.Column;
+                        button.Name = "button" + "Black" + "King" + tempPiece.Row + tempPiece.Column;
                         button.Background = blackBrush;
                     }
                 }
                 else if ((button.Name.Contains("Red")) && (!button.Name.Contains("King")))
                 {
-                    if (tmpPiece.Row == 8)
+                    if (tempPiece.Row == 8)
                     {
-                        button.Name = "button" + "Red" + "King" + tmpPiece.Row + tmpPiece.Column;
+                        button.Name = "button" + "Red" + "King" + tempPiece.Row + tempPiece.Column;
                         button.Background = redBrush;
                     }
                 }
             }
         }
-        public void AddBlackButton(GamePiece middleMove)
+
+        //BFT TODO: Rename to match functionality
+        public void RemoveJumpedPiece(GamePiece middleMove)
         {
             StackPanel stackPanel = new StackPanel();
             stackPanel.Background = Brushes.DimGray;
@@ -485,11 +427,11 @@ namespace Checkers
         public void CheckWin()
         {
             int totalBlack = 0, totalRed = 0;
-            for (int r = 1; r < 9; r++)
+            for (int row = 1; row < 9; row++)
             {
-                for (int c = 0; c < 8; c++)
+                for (int column = 0; column < 8; column++)
                 {
-                    StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, r, c);
+                    StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, row, column);
                     if (stackPanel.Children.Count > 0)
                     {
                         Button button = (Button)stackPanel.Children[0];
@@ -514,11 +456,11 @@ namespace Checkers
             }
             if (winner != null)
             {
-                for (int r = 1; r < 9; r++)
+                for (int row = 1; row < 9; row++)
                 {
-                    for (int c = 0; c < 8; c++)
+                    for (int column = 0; column < 8; column++)
                     {
-                        StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, r, c);
+                        StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, row, column);
                         if (stackPanel.Children.Count > 0)
                         {
                             Button button = (Button)stackPanel.Children[0];
@@ -547,7 +489,8 @@ namespace Checkers
         public void Connect_Click(object sender, RoutedEventArgs e)
         {
             CheckersGameClient client = new CheckersGameClient();
-            client.SendAndReceiveUserInfo();
+            client.SendUserInfo(EnterName);
+            client.ReceiveUserInfo(UsersOnline);
         }
         public void StartGame_Click(object sender, RoutedEventArgs e)
         {
