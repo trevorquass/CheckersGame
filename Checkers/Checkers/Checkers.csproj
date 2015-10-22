@@ -65,6 +65,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Buttons.cs" />
     <Compile Include="CheckersGameClient.cs" />
     <Compile Include="GameBoard.cs" />
     <Compile Include="GamePiece.cs" />

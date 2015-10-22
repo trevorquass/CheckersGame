@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using System.Net;
 using System.Net.Sockets;
 
@@ -87,6 +86,7 @@ namespace Checkers
                     button.Width = 30;
                     button.HorizontalAlignment = HorizontalAlignment.Center;
                     button.VerticalAlignment = VerticalAlignment.Center;
+                    Buttons gameStartButton = new Buttons();
                     var redBrush = new ImageBrush();
                     redBrush.ImageSource = new BitmapImage(new Uri("Images/Red.png", UriKind.Relative));
                     var blackBrush = new ImageBrush();
@@ -97,65 +97,49 @@ namespace Checkers
                             if (column % 2 != 0)
                             {
                                 //BFT TODO: Make each of these blocks into its own function, such that each case is just a function call (e.g. AddRedPiece())
-                                button.Background = redBrush;
-                                button.Name = "buttonRed" + row + column;
-                                stackPanel.Children.Add(button);
+                                gameStartButton.MakeRedButton(button, redBrush, stackPanel, row, column);
                             }
                             break;
                         case 2:
                             if (column % 2 == 0)
                             {
-                                button.Background = redBrush;
-                                button.Name = "buttonRed" + row + column;
-                                stackPanel.Children.Add(button);
+                                gameStartButton.MakeRedButton(button, redBrush, stackPanel, row, column);
                             }
                             break;
                         case 3:
                             if (column % 2 != 0)
                             {
-                                button.Background = redBrush;
-                                button.Name = "buttonRed" + row + column;
-                                stackPanel.Children.Add(button);
+                                gameStartButton.MakeRedButton(button, redBrush, stackPanel, row, column);
                             }
                             break;
                         case 4:
                             if (column % 2 == 0)
                             {
-                                button.Background = Brushes.DimGray;
-                                button.Name = "button" + row + column;
-                                stackPanel.Children.Add(button);
+                                gameStartButton.MakePlainButton(button, stackPanel, row, column);
                             }
                             break;
                         case 5:
                             if (column % 2 != 0)
                             {
-                                button.Background = Brushes.DimGray;
-                                button.Name = "button" + row + column;
-                                stackPanel.Children.Add(button);
+                                gameStartButton.MakePlainButton(button, stackPanel, row, column);
                             }
                             break;
                         case 6:
                             if (column % 2 == 0)
                             {
-                                button.Background = blackBrush;
-                                button.Name = "buttonBlack" + row + column;
-                                stackPanel.Children.Add(button);
+                                gameStartButton.MakeBlackButton(button, blackBrush, stackPanel, row, column);
                             }
                             break;
                         case 7:
                             if (column % 2 != 0)
                             {
-                                button.Background = blackBrush;
-                                button.Name = "buttonBlack" + row + column;
-                                stackPanel.Children.Add(button);
+                                gameStartButton.MakeBlackButton(button, blackBrush, stackPanel, row, column);
                             }
                             break;
                         case 8:
                             if (column % 2 == 0)
                             {
-                                button.Background = blackBrush;
-                                button.Name = "buttonBlack" + row + column;
-                                stackPanel.Children.Add(button);
+                                gameStartButton.MakeBlackButton(button, blackBrush, stackPanel, row, column);
                             }
                             break;
                         default:
@@ -180,7 +164,6 @@ namespace Checkers
             StackPanel stackPanel = (StackPanel)button.Parent;
             int row = Grid.GetRow(stackPanel);
             int col = Grid.GetColumn(stackPanel);
-            //Console.WriteLine("Row: " + row + " Column: " + col);
             if (currentMove == null)
                 currentMove = new GamePieceMovement();
             if (currentMove.piece1 == null)
@@ -242,7 +225,6 @@ namespace Checkers
             {
                 currentMove.piece1 = null;
                 currentMove.piece2 = null;
-                //Console.WriteLine("False");
                 return false;
             }
         }
@@ -264,7 +246,6 @@ namespace Checkers
                     DisplayError("Jump must be taken");
                     currentMove.piece1 = null;
                     currentMove.piece2 = null;
-                    //Console.WriteLine("False");
                     return false;
                 }
             }
@@ -313,8 +294,6 @@ namespace Checkers
         {
             if ((currentMove.piece1 != null) && (currentMove.piece2 != null))
             {
-                //Console.WriteLine("Piece1 " + currentMove.piece1.Row + ", " + currentMove.piece1.Column);
-                //Console.WriteLine("Piece2 " + currentMove.piece2.Row + ", " + currentMove.piece2.Column);
                 StackPanel stackPanel1 = (StackPanel)GetGridElement(CheckersGrid, currentMove.piece1.Row, currentMove.piece1.Column);
                 StackPanel stackPanel2 = (StackPanel)GetGridElement(CheckersGrid, currentMove.piece2.Row, currentMove.piece2.Column);
                 CheckersGrid.Children.Remove(stackPanel1);
