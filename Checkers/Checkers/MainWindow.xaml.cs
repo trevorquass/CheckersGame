@@ -504,13 +504,13 @@ namespace Checkers
             {
                 winner = "Red";
                 CheckersGameClient client = new CheckersGameClient();
-                client.SendAndReceiveWinnerInfo(winner);
+                client.SendAndReceiveGameInfo(winner);
             }
             if (totalRed == 0)
             {
                 winner = "Black";
                 CheckersGameClient client = new CheckersGameClient();
-                client.SendAndReceiveWinnerInfo(winner);
+                client.SendAndReceiveGameInfo(winner);
             }
             if (winner != null)
             {
