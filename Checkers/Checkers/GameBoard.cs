@@ -20,18 +20,18 @@ namespace Checkers
                 }
             }
         }
-        public bool SetState(int r, int c, int state)
+        public int GetGameBoardState(int r, int c)
+        {
+            if ((r > 7) || (r < 0) || (c > 7) || (c < 0))
+                return -1;
+            return board[r, c];
+        }
+        public bool SetGameBoardState(int r, int c, int state)
         {
             if ((state > 4) || (state < -1))
                 return false;
             board[r, c] = state;
             return true;
-        }
-        public int GetState(int r, int c)
-        {
-            if ((r > 7) || (r < 0) || (c > 7) || (c < 0))
-                return -1;
-            return board[r, c];
         }
         public List<GamePieceMovement> CheckJumps(string color)
         {
@@ -42,32 +42,32 @@ namespace Checkers
                 {
                     if (color == "Red")
                     {
-                        if (GetState(r, c) == 3)
+                        if (GetGameBoardState(r, c) == 3)
                         {
-                            if ((GetState(r - 2, c - 2) == 0) && ((GetState(r - 1, c - 1) == 2) || (GetState(r - 1, c - 1) == 4)))
+                            if ((GetGameBoardState(r - 2, c - 2) == 0) && ((GetGameBoardState(r - 1, c - 1) == 2) || (GetGameBoardState(r - 1, c - 1) == 4)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r - 1, c - 2)));
                             }
-                            if ((GetState(r - 2, c + 2) == 0) && ((GetState(r - 1, c + 1) == 2) || (GetState(r - 1, c + 1) == 4)))
+                            if ((GetGameBoardState(r - 2, c + 2) == 0) && ((GetGameBoardState(r - 1, c + 1) == 2) || (GetGameBoardState(r - 1, c + 1) == 4)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r - 1, c + 2)));
                             }
-                            if ((GetState(r + 2, c - 2) == 0) && ((GetState(r + 1, c - 1) == 2) || (GetState(r + 1, c - 1) == 4)))
+                            if ((GetGameBoardState(r + 2, c - 2) == 0) && ((GetGameBoardState(r + 1, c - 1) == 2) || (GetGameBoardState(r + 1, c - 1) == 4)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r + 3, c - 2)));
                             }
-                            if ((GetState(r + 2, c + 2) == 0) && ((GetState(r + 1, c + 1) == 2) || (GetState(r + 1, c + 1) == 4)))
+                            if ((GetGameBoardState(r + 2, c + 2) == 0) && ((GetGameBoardState(r + 1, c + 1) == 2) || (GetGameBoardState(r + 1, c + 1) == 4)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r + 3, c + 2)));
                             }
                         }
-                        if (GetState(r, c) == 1)
+                        if (GetGameBoardState(r, c) == 1)
                         {
-                            if ((GetState(r + 2, c - 2) == 0) && ((GetState(r + 1, c - 1) == 2) || (GetState(r + 1, c - 1) == 4)))
+                            if ((GetGameBoardState(r + 2, c - 2) == 0) && ((GetGameBoardState(r + 1, c - 1) == 2) || (GetGameBoardState(r + 1, c - 1) == 4)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r + 3, c - 2)));
                             }
-                            if ((GetState(r + 2, c + 2) == 0) && ((GetState(r + 1, c + 1) == 2) || (GetState(r + 1, c + 1) == 4)))
+                            if ((GetGameBoardState(r + 2, c + 2) == 0) && ((GetGameBoardState(r + 1, c + 1) == 2) || (GetGameBoardState(r + 1, c + 1) == 4)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r + 3, c + 2)));
                             }
@@ -75,32 +75,32 @@ namespace Checkers
                     }
                     if (color == "Black")
                     {
-                        if (GetState(r, c) == 4)
+                        if (GetGameBoardState(r, c) == 4)
                         {
-                            if ((GetState(r - 2, c - 2) == 0) && ((GetState(r - 1, c - 1) == 1) || (GetState(r - 1, c - 1) == 3)))
+                            if ((GetGameBoardState(r - 2, c - 2) == 0) && ((GetGameBoardState(r - 1, c - 1) == 1) || (GetGameBoardState(r - 1, c - 1) == 3)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r - 1, c - 2)));
                             }
-                            if ((GetState(r - 2, c + 2) == 0) && ((GetState(r - 1, c + 1) == 1) || (GetState(r - 1, c + 1) == 3)))
+                            if ((GetGameBoardState(r - 2, c + 2) == 0) && ((GetGameBoardState(r - 1, c + 1) == 1) || (GetGameBoardState(r - 1, c + 1) == 3)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r - 1, c + 2)));
                             }
-                            if ((GetState(r + 2, c - 2) == 0) && ((GetState(r + 1, c - 1) == 1) || (GetState(r + 1, c - 1) == 3)))
+                            if ((GetGameBoardState(r + 2, c - 2) == 0) && ((GetGameBoardState(r + 1, c - 1) == 1) || (GetGameBoardState(r + 1, c - 1) == 3)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r + 3, c - 2)));
                             }
-                            if ((GetState(r + 2, c + 2) == 0) && ((GetState(r + 1, c + 1) == 1) || (GetState(r + 1, c + 1) == 3)))
+                            if ((GetGameBoardState(r + 2, c + 2) == 0) && ((GetGameBoardState(r + 1, c + 1) == 1) || (GetGameBoardState(r + 1, c + 1) == 3)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r + 3, c + 2)));
                             }
                         }
-                        if (GetState(r, c) == 2)
+                        if (GetGameBoardState(r, c) == 2)
                         {
-                            if ((GetState(r - 2, c - 2) == 0) && ((GetState(r - 1, c - 1) == 1) || (GetState(r - 1, c - 1) == 3)))
+                            if ((GetGameBoardState(r - 2, c - 2) == 0) && ((GetGameBoardState(r - 1, c - 1) == 1) || (GetGameBoardState(r - 1, c - 1) == 3)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r - 1, c - 2)));
                             }
-                            if ((GetState(r - 2, c + 2) == 0) && ((GetState(r - 1, c + 1) == 1) || (GetState(r - 1, c + 1) == 3)))
+                            if ((GetGameBoardState(r - 2, c + 2) == 0) && ((GetGameBoardState(r - 1, c + 1) == 1) || (GetGameBoardState(r - 1, c + 1) == 3)))
                             {
                                 jumps.Add(new GamePieceMovement(new GamePiece(r + 1, c), new GamePiece(r - 1, c + 2)));
                             }

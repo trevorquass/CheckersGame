@@ -15,18 +15,6 @@ using System.Windows.Shapes;
 
 namespace Checkers
 {
-    //public partial class MainWindow : Window
-    //{
-    //    public MainWindow()
-    //    {
-    //        InitializeComponent();
-    //    }
-    //    public void Connect_Click(object sender, RoutedEventArgs e)
-    //    {
-    //        CheckersGameClient client = new CheckersGameClient();
-    //        client.SendAndReceiveUserInfo();
-    //    }
-    //}
     public partial class MainWindow : Window
     {
         private GamePieceMovement currentMove;
@@ -42,17 +30,6 @@ namespace Checkers
             this.Title = "Checkers: Blacks turn";
             MakeBoard();
         }
-        private void ClearBoard()
-        {
-            for (int r = 1; r < 9; r++)
-            {
-                for (int c = 0; c < 8; c++)
-                {
-                    StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, r, c);
-                    CheckersGrid.Children.Remove(stackPanel);
-                }
-            }
-        }
         private void MakeBoard()
         {
             for (int r = 1; r < 9; r++)
@@ -60,7 +37,7 @@ namespace Checkers
                 for (int c = 0; c < 8; c++)
                 {
                     StackPanel stackPanel = new StackPanel();
-                    if (r % 2 == 1)
+                    if (r % 2 != 0)
                     {
                         if (c % 2 == 0)
                             stackPanel.Background = Brushes.White;
@@ -79,8 +56,18 @@ namespace Checkers
                     CheckersGrid.Children.Add(stackPanel);
                 }
             }
-
             MakeButtons();
+        }
+        private void ClearBoard()
+        {
+            for (int r = 1; r < 9; r++)
+            {
+                for (int c = 0; c < 8; c++)
+                {
+                    StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, r, c);
+                    CheckersGrid.Children.Remove(stackPanel);
+                }
+            }
         }
         private void MakeButtons()
         {
@@ -102,7 +89,7 @@ namespace Checkers
                     switch (r)
                     {
                         case 1:
-                            if (c % 2 == 1)
+                            if (c % 2 != 0)
                             {
 
                                 button.Background = redBrush;
@@ -119,7 +106,7 @@ namespace Checkers
                             }
                             break;
                         case 3:
-                            if (c % 2 == 1)
+                            if (c % 2 != 0)
                             {
                                 button.Background = redBrush;
                                 button.Name = "buttonRed" + r + c;
@@ -135,7 +122,7 @@ namespace Checkers
                             }
                             break;
                         case 5:
-                            if (c % 2 == 1)
+                            if (c % 2 != 0)
                             {
                                 button.Background = Brushes.DimGray;
                                 button.Name = "button" + r + c;
@@ -151,7 +138,7 @@ namespace Checkers
                             }
                             break;
                         case 7:
-                            if (c % 2 == 1)
+                            if (c % 2 != 0)
                             {
                                 button.Background = blackBrush;
                                 button.Name = "buttonBlack" + r + c;
@@ -276,7 +263,6 @@ namespace Checkers
                     return false;
                 }
             }
-
             if (button1.Name.Contains("Red"))
             {
                 if (button1.Name.Contains("King"))
@@ -340,7 +326,6 @@ namespace Checkers
                     return false;
                 }
             }
-
             if (button1.Name.Contains("Black"))
             {
                 if (button1.Name.Contains("King"))
@@ -427,26 +412,24 @@ namespace Checkers
                         if (button.Name.Contains("Red"))
                         {
                             if (button.Name.Contains("King"))
-                                board.SetState(r - 1, c, 3);
+                                board.SetGameBoardState(r - 1, c, 3);
                             else
-                                board.SetState(r - 1, c, 1);
+                                board.SetGameBoardState(r - 1, c, 1);
                         }
                         else if (button.Name.Contains("Black"))
                         {
                             if (button.Name.Contains("King"))
-                                board.SetState(r - 1, c, 4);
+                                board.SetGameBoardState(r - 1, c, 4);
                             else
-                                board.SetState(r - 1, c, 2);
+                                board.SetGameBoardState(r - 1, c, 2);
                         }
                         else
-                            board.SetState(r - 1, c, 0);
-
+                            board.SetGameBoardState(r - 1, c, 0);
                     }
                     else
                     {
-                        board.SetState(r - 1, c, -1);
+                        board.SetGameBoardState(r - 1, c, -1);
                     }
-
                 }
             }
             return board;
@@ -532,7 +515,7 @@ namespace Checkers
                         }
                     }
                 }
-                MessageBoxResult result = MessageBox.Show(winner + " is the winner! Would you like to play another?", "Winner", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show(winner + " is the winner. Would you like to play again?", "Winner", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                     NewGame();
             }
@@ -554,6 +537,10 @@ namespace Checkers
         {
             CheckersGameClient client = new CheckersGameClient();
             client.SendAndReceiveUserInfo();
+        }
+        private void StartGame_Click(object sender, RoutedEventArgs e)
+        {
+            NewGame();
         }
     }
 }
