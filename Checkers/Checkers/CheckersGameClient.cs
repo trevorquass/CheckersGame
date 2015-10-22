@@ -36,7 +36,7 @@ namespace Checkers
                 MessageBox.Show("Exception" + ex.Message);
             }
         }
-        public void SendWinnerInfo(string winner)
+        public void SendAndReceiveWinnerInfo(string winner)
         {
             const int portNumber = 7777;
             const string serverIP = "10.2.20.16";
