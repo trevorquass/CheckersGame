@@ -77,7 +77,6 @@ namespace Checkers
                 if ((piece1.Row + 2 == piece2.Row) && (piece1.Column + 2 == piece2.Column))
                     return new GamePiece(piece1.Row + 1, piece1.Column + 1);
             }
-
             return null;
         }
         public override bool Equals(System.Object obj)
@@ -91,7 +90,6 @@ namespace Checkers
             {
                 return false;
             }
-
             return ((piece1.Equals(move.piece1)) && (piece2.Equals(move.piece2)));
         }
     }

@@ -41,7 +41,7 @@ namespace Checkers {
     public partial class MainWindow : System.Windows.Window, System.Windows.Markup.IComponentConnector {
         
         
-        #line 155 "..\..\MainWindow.xaml"
+        #line 7 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Grid CheckersGrid;
         
@@ -49,7 +49,7 @@ namespace Checkers {
         #line hidden
         
         
-        #line 178 "..\..\MainWindow.xaml"
+        #line 30 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.ListBox UsersOnline;
         
@@ -57,7 +57,7 @@ namespace Checkers {
         #line hidden
         
         
-        #line 179 "..\..\MainWindow.xaml"
+        #line 31 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button StartGame;
         
@@ -65,7 +65,7 @@ namespace Checkers {
         #line hidden
         
         
-        #line 182 "..\..\MainWindow.xaml"
+        #line 34 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBox EnterName;
         
@@ -73,7 +73,7 @@ namespace Checkers {
         #line hidden
         
         
-        #line 183 "..\..\MainWindow.xaml"
+        #line 35 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Button Connect;
         
@@ -119,7 +119,7 @@ namespace Checkers {
             case 3:
             this.StartGame = ((System.Windows.Controls.Button)(target));
             
-            #line 179 "..\..\MainWindow.xaml"
+            #line 31 "..\..\MainWindow.xaml"
             this.StartGame.Click += new System.Windows.RoutedEventHandler(this.StartGame_Click);
             
             #line default
@@ -131,7 +131,7 @@ namespace Checkers {
             case 5:
             this.Connect = ((System.Windows.Controls.Button)(target));
             
-            #line 183 "..\..\MainWindow.xaml"
+            #line 35 "..\..\MainWindow.xaml"
             this.Connect.Click += new System.Windows.RoutedEventHandler(this.Connect_Click);
             
             #line default
