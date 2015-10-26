@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
 using System.Net.Sockets;
+using System.Windows.Controls.Primitives;
+using System.Threading;
 
 namespace Checkers
 {
@@ -71,8 +73,6 @@ namespace Checkers
                 }
             }
         }
-
-        //BFT TODO: Rename r and c to row and column
         public void MakeButtons()
         {
             for (int row = 1; row < 9; row++)
@@ -96,7 +96,6 @@ namespace Checkers
                         case 1:
                             if (column % 2 != 0)
                             {
-                                //BFT TODO: Make each of these blocks into its own function, such that each case is just a function call (e.g. AddRedPiece())
                                 gameStartButton.MakeRedButton(button, redBrush, stackPanel, row, column);
                             }
                             break;
@@ -355,7 +354,6 @@ namespace Checkers
             }
             return board;
         }
-        //BFT TODO: Rename to match functionality
         public void MakePieceKing(GamePiece tempPiece)
         {
             StackPanel stackPanel = (StackPanel)GetGridElement(CheckersGrid, tempPiece.Row, tempPiece.Column);
@@ -384,8 +382,6 @@ namespace Checkers
                 }
             }
         }
-
-        //BFT TODO: Rename to match functionality
         public void RemoveJumpedPiece(GamePiece middleMove)
         {
             StackPanel stackPanel = new StackPanel();
@@ -468,8 +464,9 @@ namespace Checkers
         public void Connect_Click(object sender, RoutedEventArgs e)
         {
             CheckersGameClient client = new CheckersGameClient();
-            client.SendUserInfo(EnterName);
-            client.ReceiveUserInfo(UsersOnline);
+            //client.SendUserInfo(EnterName);
+            //client.ReceiveUserInfo(UsersOnline);
+            client.SendAndReceiveUserInfo();
         }
         public void StartGame_Click(object sender, RoutedEventArgs e)
         {
