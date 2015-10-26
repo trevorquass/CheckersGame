@@ -9,8 +9,6 @@ namespace Checkers
 {
     public class GameBoard
     {
-        //BFT TODO: Rename r and c to row and column
-        //BFT TODO: Get rid of magic numbers in file
         public int[,] board = new int[8, 8];
         public enum State
         {

@@ -16,7 +16,6 @@ namespace Checkers
             Row = row;
             Column = col;
         }
-        //BFT TODO: Pass in a GamePiece instead of a System.Object
         public override bool Equals(System.Object obj)
         {
             if (obj == null)
