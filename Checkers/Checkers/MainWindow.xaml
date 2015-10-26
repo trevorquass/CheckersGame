@@ -27,11 +27,13 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
         </Grid>
-        <ListBox x:Name="UsersOnline" HorizontalAlignment="Left" Height="115" Margin="10,135,0,0" VerticalAlignment="Top" Width="105"/>
+        <ListBox x:Name="UsersOnline" HorizontalAlignment="Left" Height="95" Margin="10,155,0,0" VerticalAlignment="Top" Width="105"/>
         <Button x:Name="StartGame" IsEnabled="{Binding ElementName=UsersOnline, Path=SelectedItems.Count}" Content="Start Game" HorizontalAlignment="Left" Height="30" Margin="10,255,0,0" VerticalAlignment="Top" Width="105" Click="StartGame_Click"/>
-        <TextBlock HorizontalAlignment="Left" Height="20" Margin="10,115,0,0" TextWrapping="Wrap" Text="Users Online:" VerticalAlignment="Top" Width="105"/>
-        <TextBlock HorizontalAlignment="Left" Height="20" Margin="10,22,0,0" TextWrapping="Wrap" Text="Enter Name:" VerticalAlignment="Top" Width="105"/>
-        <TextBox x:Name="EnterName" HorizontalAlignment="Left" Height="23" Margin="10,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="105"/>
-        <Button x:Name="Connect" Content="Connect" HorizontalAlignment="Left" Height="30" Margin="10,70,0,0" VerticalAlignment="Top" Width="105" Click="Connect_Click"/>
+        <TextBlock HorizontalAlignment="Left" Height="20" Margin="10,135,0,0" TextWrapping="Wrap" Text="Users Online:" VerticalAlignment="Top" Width="105"/>
+        <TextBlock HorizontalAlignment="Left" Height="20" Margin="10,52,0,0" TextWrapping="Wrap" Text="Enter Name:" VerticalAlignment="Top" Width="105"/>
+        <TextBox x:Name="EnterName" HorizontalAlignment="Left" Height="23" Margin="10,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="105"/>
+        <Button x:Name="Connect" Content="Connect" HorizontalAlignment="Left" Height="30" Margin="10,100,0,0" VerticalAlignment="Top" Width="105" Click="Connect_Click"/>
+        <RadioButton Content="Single Player" HorizontalAlignment="Left" Height="20" Margin="10,10,0,0" VerticalAlignment="Top" Width="105" Checked="RadioButton_Checked"/>
+        <RadioButton Content="Multiplayer" HorizontalAlignment="Left" Height="20" Margin="10,32,0,0" VerticalAlignment="Top" Width="105" Checked="RadioButton_Checked_1"/>
     </Grid>
 </Window>

@@ -464,11 +464,19 @@ namespace Checkers
         public void Connect_Click(object sender, RoutedEventArgs e)
         {
             CheckersGameClient client = new CheckersGameClient();
-            //client.SendUserInfo(EnterName);
-            //client.ReceiveUserInfo(UsersOnline);
             client.SendAndReceiveUserInfo();
         }
         public void StartGame_Click(object sender, RoutedEventArgs e)
+        {
+            NewGame();
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            NewGame();
+        }
+
+        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
         {
             NewGame();
         }
